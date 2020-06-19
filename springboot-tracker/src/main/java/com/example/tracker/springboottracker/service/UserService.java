@@ -1,5 +1,7 @@
 package com.example.tracker.springboottracker.service;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.example.tracker.springboottracker.modal.User;
@@ -10,4 +12,6 @@ public interface UserService extends UserDetailsService {
 	User findByEmail(String email);
 
 	User save(UserRegistrationDto registration);
+
+	List<User> findAll();
 }

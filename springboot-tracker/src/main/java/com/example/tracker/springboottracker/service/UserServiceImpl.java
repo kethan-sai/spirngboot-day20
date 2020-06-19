@@ -2,6 +2,7 @@ package com.example.tracker.springboottracker.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User save(UserRegistrationDto registration) {
 		final User user = new User();
+		if (registration.getEmail() == "mean@mail.com") {
+			user.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+		} else {
+			user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+		}
 		user.setFirstName(registration.getFirstName());
 		user.setLastName(registration.getLastName());
 		user.setEmail(registration.getEmail());
 		user.setPassword(passwordEncoder.encode(registration.getPassword()));
-		user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+
 		return userRepository.save(user);
 	}
 
@@ -55,4 +61,11 @@ public class UserServiceImpl implements UserService {
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<User> findAll() {
+
+		return userRepository.findAll();
+	}
+
 }

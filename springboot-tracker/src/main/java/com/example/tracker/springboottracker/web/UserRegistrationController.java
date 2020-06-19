@@ -48,4 +48,12 @@ public class UserRegistrationController {
 		userService.save(userDto);
 		return "redirect:/registration?success";
 	}
+
+	@GetMapping("/allusers")
+	public String findUsers(Model model) {
+
+		model.addAttribute("users", userService.findAll());
+		return "allusers";
+	}
+
 }
