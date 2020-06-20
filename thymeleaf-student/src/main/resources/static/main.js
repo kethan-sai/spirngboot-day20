@@ -30,12 +30,6 @@ $('document').ready(function() {
 		
 	});
 	
-	$('.table #categoryButton').on('click',function(event) {
-		event.preventDefault();
-		var href = $(this).attr('href');
-		$('#categoryModal').attr('href', href);
-		$('#categoryModal').modal();
-		
-	});
+	
 	
 });

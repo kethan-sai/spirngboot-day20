@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,12 +58,12 @@ public class StudentController {
 		return "redirect:/students/getAll";
 	}
 
-	@RequestMapping("/byCategory")
-	public String byCategory(@RequestParam(value = "categoryButton") String cat) {
-		studentService.findByCategory(cat);
-		System.out.println(cat);
+	@GetMapping("/byCategory")
+	public String findStudentsInCategory(Model model, @RequestParam String category) {
+		final List<Student> categoryStudents = studentService.findByCategory(category);
 
-		return "output";
+		model.addAttribute("CategoryStudents", categoryStudents);
+		return "StudentCategory";
 	}
 
 }

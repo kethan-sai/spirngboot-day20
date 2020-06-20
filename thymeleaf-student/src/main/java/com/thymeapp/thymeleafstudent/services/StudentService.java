@@ -5,13 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thymeapp.thymeleafstudent.models.Student;
 import com.thymeapp.thymeleafstudent.repositories.StudentRepository;
 
 @Service
-public class StudentService {
+public class StudentService implements StudentCategoryService {
 
 	@Autowired
 	private StudentRepository studentRepository;
@@ -36,11 +35,11 @@ public class StudentService {
 		studentRepository.deleteById(Id);
 	}
 
-	public List<Student> findByCategory(@RequestParam String categoryName) {
-		final List<Student> students1 = studentRepository.findByCategory(categoryName);
-		for (final Student student : students1) {
-			System.out.println(student);
-		}
-		return students1;
+	@Override
+	public List<Student> findByCategory(String category) {
+
+		final List<Student> categoryList = studentRepository.findByCategory(category);
+		return categoryList;
 	}
+
 }

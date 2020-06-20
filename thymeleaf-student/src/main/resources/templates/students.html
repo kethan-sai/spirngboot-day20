@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet" />
 <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
@@ -26,17 +26,7 @@
 				<li class="nav-item active"><a class="nav-link" href="#">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#"
-					tabindex="-1" aria-disabled="true">Disabled</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="dropdown01"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="#">Action</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="#">Something else here</a>
-					</div></li>
+				
 			</ul>
 			<div style="color: #FFFFFF" class="nav-item active">
 				<h5>
@@ -58,15 +48,15 @@
 				data-target="#addModal">Add New</button>
 
 			<table class="table table-stripped">
-				<thead>
+				<thead class="thead-dark">
 					<tr>
-						<td>Id</td>
-						<td>Name</td>
-						<td>Department</td>
-						<td>Updated By</td>
-						<td>Updated On</td>
-						<td>Edit</td>
-						<td>Delete</td>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Department</th>
+						<th>Updated By</th>
+						<th>Updated On</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 
@@ -81,8 +71,8 @@
 					<td><a th:href="@{/students/delete/(Id=${student.Id})}"
 						class="btn btn-danger" id="deleteButton">Delete</a></td>
 					<td><a
-						th:href="@{/students/byCategory/(Id=${student.department})}"
-						class="btn btn-danger" id="categoryButton">category</a></td>
+						th:href="@{/students/byCategory(category=${student.department})}"
+						class="btn btn-info" >category</a></td>
 				</tr>
 			</table>
 
@@ -226,37 +216,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"
-		aria-labelledby="categoryLabel" aria-hidden="true">
-		<form th:action="@{/students/byCategory}" method="get">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-
-					<div class="modal-header">
-
-						<table class="table table-stripped">
-							<thead>
-								<tr>
-									<td>Id</td>
-									<td>Name</td>
-									<td>Department</td>
-
-								</tr>
-							</thead>
-
-							<div class="modal-body">
-							<tr th:each="student:${students}">
-								<td th:text="${student.Id}">Id</td>
-								<td th:text="${student.name}">Name</td>
-								<td th:text="${student.department}">Department</td>
-							</tr>
-							</div>
-						</table>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+	
 
 
 </body>
